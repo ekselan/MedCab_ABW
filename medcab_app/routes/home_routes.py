@@ -1,107 +1,7 @@
-# our routes for json
-
 from flask import Blueprint
-import os
-from dotenv import load_dotenv
-import psycopg2
-import pandas as pd
-
-load_dotenv()
-
-DB_NAME = os.getenv("DB_NAME")
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST")
-
-print(DB_NAME, DB_USER, DB_PASSWORD, DB_HOST)
+from medcab_app.routes.services import fetch_data, fetch_strains, fetch_top
 
 home_routes = Blueprint("home_routes", __name__)
-
-def fetch_strains(query):
-    # Creating connection object inside function to sustain connection
-    # until session end
-    connection = psycopg2.connect(
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD,
-        host=DB_HOST)
-    cursor = connection.cursor()
-
-    # Execute query
-    cursor.execute(query)
-    # Query results
-    strains = list(cursor.fetchall())
-    # Key-value pair names for df columns
-    columns = ["id",
-               "strain",
-               "rating"]
-    # List of tuples to DF
-    df = pd.DataFrame(strains, columns=columns)
-    print(type(df))
-
-    # DF to dictionary
-    pairs = df.to_json(orient='records')
-    print(type(pairs))
-    # Closing Connection
-    connection.close()
-    return pairs
-
-def fetch_top(query):
-    # Creating connection object inside function to sustain connection
-    # until session end
-    connection = psycopg2.connect(
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD,
-        host=DB_HOST)
-    cursor = connection.cursor()
-
-    # Execute query
-    cursor.execute(query)
-    # Query results
-    strains = list(cursor.fetchall())
-    # Key-value pair names for df columns
-    columns = ["strain"]
-    # List of tuples to DF
-    df = pd.DataFrame(strains, columns=columns)
-    print(type(df))
-
-    # DF to dictionary
-    pairs = df.to_json(orient='records')
-    print(type(pairs))
-    # Closing Connection
-    connection.close()
-    return pairs
-
-def fetch_data(query):
-      # Creating connection object inside function to sustain connection
-    # until session end
-    connection = psycopg2.connect(
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD,
-        host=DB_HOST)
-    cursor = connection.cursor()
-
-    # Execute query
-    cursor.execute(query)
-    # Query results
-    strains = list(cursor.fetchall())
-    # Key-value pair names for df columns
-    columns = ["strain", "id",
-                "flavors",
-                "effects",
-                "medical",
-                "type",
-                "rating",
-                "flavor"]
-    # List of tuples to DF
-    df = pd.DataFrame(strains, columns=columns)
-    # DF to dictionary
-    pairs = df.to_json(orient='records')
-    # Closing Connection
-    connection.close()
-    return pairs
 
 @home_routes.route("/")
 def index():
@@ -121,6 +21,7 @@ def strains():
 def recommendations():
     return "This will list recommendations."
 
+
 @home_routes.route("/data")
 def data():
     query = """
@@ -128,6 +29,7 @@ def data():
     FROM medcab
     """
     return fetch_data(query)
+
 
 @home_routes.route("/toptenrating")
 def toprating():
