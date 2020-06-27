@@ -1,5 +1,6 @@
 from flask import Blueprint
 from medcab_app.routes.services import fetch_data, fetch_strains, fetch_top
+import pprint
 
 home_routes = Blueprint("home_routes", __name__)
 
@@ -14,7 +15,8 @@ def strains():
     SELECT id, strain, rating
     FROM medcab
     '''
-    return fetch_strains(query)
+    test = fetch_strains(query)
+    return "This is a test"
 
 
 @home_routes.route("/recx")
