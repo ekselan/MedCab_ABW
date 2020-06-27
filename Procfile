@@ -1,1 +1,1 @@
-web: gunicorn "MedCab:create_app()"
+web: gunicorn "medcab_app:create_app()"
