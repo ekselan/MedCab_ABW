@@ -1,7 +1,7 @@
 # MedCab_ABW
 
 ## Installation for Dependencies
-Flask, Flask-Cors, Psycopg2, Gunicorn, Requests, Dotenv
+Flask, Flask-Cors, Psycopg2, Gunicorn, Requests, Dotenv, Scikit-learn, Pandas
 - pipenv
 ```sh
 pipenv install Flask flask-cors psycopg2-binary gunicorn requests python-dotenv scikit-learn pandas
@@ -23,9 +23,9 @@ DB_HOST="___________"
 ## Running the app locally using Flask  
 **In a terminal:**  
 Mac/Linux:  
-`FLASK_APP=MedCab flask run`  
+`FLASK_APP=medcab_app flask run`  
 Windows:  
-`export FLASK_APP=MedCab` (set env var)  
+`export FLASK_APP=medcab_app` (set env var)  
 `flask run`
 
 ---
