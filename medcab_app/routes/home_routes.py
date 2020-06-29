@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template
-from medcab_app.routes.services import fetch_data, fetch_strains, fetch_top
+from medcab_app.routes.services import fetch_data, fetch_strains, fetch_top, parse_records
 import pprint
 
 home_routes = Blueprint("home_routes", __name__)
@@ -18,13 +18,14 @@ def strains_json():
     return "This is a test"
 
 @home_routes.route("/strains")
-def strains():
+def list_strains():
     query = """
     SELECT id, strain, rating
     FROM medcab
     """
     strain_records = fetch_strains(query)
-    return render_template("strains.html", message="Here's some strains", strains=strain_records)
+    strains = parse_records(strain_records)
+    return render_template("strains.html", message="Here's some strains", strains=strains)
 
 
 @home_routes.route("/recx")
