@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+medcab_app/.DS_Store
+medcab_app/.DS_Store
+.DS_Store
