@@ -15,7 +15,6 @@ def strains_json():
     SELECT id, strain, rating
     FROM medcab
     '''
-    test = fetch_strains(query)
     return "This is a test"
 
 @home_routes.route("/strains")
@@ -24,7 +23,8 @@ def strains():
     SELECT id, strain, rating
     FROM medcab
     """
-    return render_template("strains.html", message="Here's some strains", strains=strains)
+    strain_records = fetch_strains(query)
+    return render_template("strains.html", message="Here's some strains", strains=strain_records)
 
 
 @home_routes.route("/recx")

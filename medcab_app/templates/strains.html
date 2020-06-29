@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% set active_page = "books" %}
+
+{% block content %}
+
+    <h2>Welcome to the Strains Page</h2>
+
+    <p>{{ message }}</p>
+
+    {% if strain_records %}
+        <ul>
+        {% for strain in strain_records %}
+            <li>{{ strain["strain"] }}</li>
+        {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>Strains not found.</p>
+    {% endif %}
+
+{% endblock %}
