@@ -4,11 +4,11 @@
 Flask, Flask-Cors, Psycopg2, Gunicorn, Requests, Dotenv, Scikit-learn, Pandas
 - pipenv
 ```sh
-pipenv install Flask flask-cors psycopg2-binary gunicorn requests python-dotenv scikit-learn pandas
+pipenv install Flask flask-cors flask-sqlalchemy flask-migrate psycopg2-binary gunicorn requests python-dotenv scikit-learn pandas
 ```
 - conda
 ```sh
-pip install Flask flask-cors psycopg2-binary gunicorn requests python-dotenv scikit-learn pandas
+pip install Flask flask-cors flask-sqlalchemy flask-migrate psycopg2-binary gunicorn requests python-dotenv scikit-learn pandas
 ```
 - PostgreSQL Database Connection
 Example of format to place credentials inside a .env file:
